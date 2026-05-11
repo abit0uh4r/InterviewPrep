@@ -83,12 +83,6 @@ php artisan route:list
 npm run build
 ```
 
-## Ecart PLAN vs BUILD
-
-- PLAN initial : auth manuelle native (controleurs et requests crees a la main).
-- BUILD retenu : Laravel Breeze (Blade).
-- Justification : base auth plus rapide a mettre en place, plus robuste, et totalement compatible avec les contraintes du projet.
-
 ## Risques et attention
 
 - Ne pas melanger logique metier InterviewPrep dans les controleurs auth Breeze.
