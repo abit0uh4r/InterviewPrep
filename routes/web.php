@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArchivedConceptController;
 use App\Http\Controllers\ConceptController;
 use App\Http\Controllers\ConceptStatusController;
 use App\Http\Controllers\DomainController;
@@ -25,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('domains', DomainController::class);
     Route::resource('domains.concepts', ConceptController::class);
     Route::patch('concepts/{concept}/status', ConceptStatusController::class)->name('concepts.status.update');
+    Route::get('archived-concepts', [ArchivedConceptController::class, 'index'])->name('archived-concepts.index');
+    Route::patch('archived-concepts/{concept}/restore', [ArchivedConceptController::class, 'restore'])->name('archived-concepts.restore');
 });
 
 
