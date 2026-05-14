@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ConceptController;
+use App\Http\Controllers\ConceptStatusController;
+use App\Http\Controllers\DomainController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DomainController;
 
 
 Route::get('/', function () {
@@ -21,6 +23,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('domains', DomainController::class);
+    Route::resource('domains.concepts', ConceptController::class);
+    Route::patch('concepts/{concept}/status', ConceptStatusController::class)->name('concepts.status.update');
 });
 
 
