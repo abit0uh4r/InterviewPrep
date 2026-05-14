@@ -1,3 +1,123 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-slate-50 text-slate-900 antialiased;
+        background-image:
+            radial-gradient(circle at top left, rgba(124, 92, 255, 0.16), transparent 28%),
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 24%),
+            linear-gradient(180deg, #fcfcff 0%, #f7f8fc 100%);
+    }
+
+    input,
+    select,
+    textarea {
+        @apply text-slate-900;
+    }
+}
+
+@layer components {
+    .app-shell {
+        @apply min-h-screen lg:grid lg:grid-cols-[280px_minmax(0,1fr)];
+    }
+
+    .app-sidebar {
+        @apply hidden lg:flex lg:flex-col border-r border-slate-200/80 bg-white/80 backdrop-blur-xl;
+    }
+
+    .app-main {
+        @apply min-h-screen;
+    }
+
+    .app-topbar {
+        @apply sticky top-0 z-20 flex items-center justify-between gap-4 border-b border-slate-200/80 bg-white/75 px-5 py-3 backdrop-blur-xl sm:px-7;
+    }
+
+    .content-wrap {
+        @apply mx-auto w-full max-w-[1440px] px-5 py-5 sm:px-7;
+    }
+
+    .surface {
+        @apply rounded-[24px] border border-slate-200/80 bg-white/90 shadow-[0_16px_48px_rgba(15,23,42,0.05)];
+    }
+
+    .metric-card {
+        @apply surface p-4;
+    }
+
+    .sidebar-link {
+        @apply flex items-center gap-3 rounded-2xl px-4 py-3 text-[15px] font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
+    }
+
+    .sidebar-link-active {
+        @apply bg-gradient-to-r from-indigo-600 to-violet-500 text-white shadow-[0_14px_30px_rgba(99,102,241,0.28)];
+    }
+
+    .brand-button {
+        @apply inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(99,102,241,0.25)] transition hover:scale-[1.01] hover:shadow-[0_18px_36px_rgba(99,102,241,0.3)];
+    }
+
+    .ghost-button {
+        @apply inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900;
+    }
+
+    .difficulty-chip {
+        @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold;
+    }
+
+    .difficulty-chip-junior {
+        @apply bg-emerald-100 text-emerald-700;
+    }
+
+    .difficulty-chip-mid {
+        @apply bg-amber-100 text-amber-700;
+    }
+
+    .difficulty-chip-senior {
+        @apply bg-violet-100 text-violet-700;
+    }
+
+    .form-shell {
+        @apply surface mx-auto max-w-[1100px] overflow-hidden;
+    }
+
+    .form-panel {
+        @apply grid gap-8 lg:grid-cols-[0.95fr_1.25fr];
+    }
+
+    .form-aside {
+        @apply flex flex-col justify-between border-b border-slate-200/70 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.16),_transparent_56%),linear-gradient(180deg,rgba(248,250,252,0.98),rgba(255,255,255,0.88))] p-7 lg:border-b-0 lg:border-r;
+    }
+
+    .form-main {
+        @apply p-7 sm:p-8;
+    }
+
+    .field-label {
+        @apply mb-2 block text-sm font-semibold text-slate-700;
+    }
+
+    .field-input,
+    .field-select,
+    .field-textarea {
+        @apply block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100;
+    }
+
+    .field-textarea {
+        @apply min-h-36 resize-y;
+    }
+
+    .field-color {
+        @apply h-12 w-20 rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100;
+    }
+
+    .helper-text {
+        @apply text-sm leading-6 text-slate-500;
+    }
+
+    .error-text {
+        @apply mt-2 text-sm font-medium text-rose-600;
+    }
+}
