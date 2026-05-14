@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreDomainRequest;
 use App\Http\Requests\UpdateDomainRequest;
 use App\Models\Domain;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 
 class DomainController extends Controller
@@ -18,7 +17,15 @@ class DomainController extends Controller
      */
     public function index(): View
     {
-        $domains = Domain::query()->where('user_id', Auth::id())->latest()->get();
+        $domains = Domain::query()
+            ->where('user_id', Auth::id())
+            ->withCount([
+                'concepts',
+                'concepts as mastered_concepts_count' => fn ($query) => $query->where('status', 'mastered'),
+            ])
+            ->latest()
+            ->get();
+
         return view('domains.index', compact('domains'));
     }
 
@@ -36,18 +43,21 @@ class DomainController extends Controller
     public function store(StoreDomainRequest $request): RedirectResponse
     {
         Domain::create([
-        'user_id' => Auth::id(),
-        ...$request->validated()
+            'user_id' => Auth::id(),
+            ...$request->validated(),
         ]);
-        return redirect()->route('domains.index')->with('success', 'Domain created successfully.'); 
+
+        return redirect()->route('domains.index')->with('success', 'Domain created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Domain $domain): View
     {
-        
+        abort_if($domain->user_id !== Auth::id(), 403);
+
+        return view('domains.show', compact('domain'));
     }
 
     /**
@@ -73,8 +83,6 @@ class DomainController extends Controller
         $domain->update($request->validated());
 
         return redirect()->route('domains.index')->with('success', 'Domain updated successfully.');
-    
-        //
     }
 
     /**
